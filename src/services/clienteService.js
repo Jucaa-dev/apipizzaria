@@ -10,7 +10,8 @@ export const findAll = async () => {
 
 export const findByCpf = async (cpf) => {
     const [result] = await db.query('SELECT * FROM cliente WHERE cpf = ?', [cpf]);
-    return result.length > 0 ? result[0] : null;
+    //return result.length > 0 ? result[0] : null;
+    return result[0]
 };
 
 export const findByEmail = async (email) => {

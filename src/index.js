@@ -1,15 +1,14 @@
 //primeira linha do seu projeto. carrega as variaveis de ambiente antes de qualquer outro codigo
 import 'dotenv/config'
+
 // sintaxe de importação para todas as dependencias
-//1. Importa a ferramenta Express
 import express from 'express';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url'; // necessario para recriar o '_dirname'
-import db from './db/db.js'; // excluir depois
-
+import clienteRoutes from './routes/clienteRoutes.js'; 
 
 // Configuração
 const _filename = fileURLToPath(import.meta.url)
@@ -23,7 +22,6 @@ const corsOptions = {
 //2. cria a nossa aplicação (nosso servidor)
 const app = express()
 
-//habilita o Express para entender o formato JSON no corpo das requisiçoes
 // MIDDLEWARE
 app.use(helmet());
 app.use(cors(corsOptions));
@@ -43,6 +41,11 @@ app.get('/', (request, response) => {
     //estamos enviando uma resposta no formato JSON
     response.sendFile(path.join(_dirname,'..','pages','home.html'));
 })
+
+// Rotas da API prefixadas, isso evita conflitos e deixa claro quais rotas pertencem à API.
+const apiPrefix = '/api';
+// Rotas gerais da API (ex: /api/sandro)
+app.use(`${apiPrefix}/clientes`, clienteRoutes); // ex: /api/clientes/
 
 // --TRATAMENTO DE ERROS --
 app.use((err, req, res, next) => {

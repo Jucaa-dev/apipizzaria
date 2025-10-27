@@ -3,7 +3,7 @@ import * as clienteService from '../services/clienteService.js';
 import Joi from 'joi';
 
 // Usando 'export const'
-export const clienteCreateSchema = joi.object({
+export const clienteCreateSchema = Joi.object({
     cpf: Joi.string().length(11).required(),
     nome: Joi.string().required().max(100),
     endereco: Joi.string().required().max(100),
@@ -15,7 +15,7 @@ export const clienteCreateSchema = joi.object({
     senha: Joi.string().min(6).required()
 });
 
-export const clienteUpdateSchema = joi.object({
+export const clienteUpdateSchema = Joi.object({
     nome: Joi.string().max(100),
     endereco: Joi.string().max(100),
     bairro: Joi.string().allow('').max(50),
