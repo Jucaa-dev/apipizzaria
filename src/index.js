@@ -8,7 +8,15 @@ import morgan from 'morgan';
 import cors from 'cors';
 import path from 'path';
 import { fileURLToPath } from 'url'; // necessario para recriar o '_dirname'
+
+// Importando as rotas.
+
+// Importa as rotas de autenticação
+import authRoutes from './routes/authRoutes.js';
+
 import clienteRoutes from './routes/clienteRoutes.js'; 
+
+import produtoRoutes from './routes/produtoRoutes.js';
 
 // Configuração
 const _filename = fileURLToPath(import.meta.url)
@@ -46,6 +54,8 @@ app.get('/', (request, response) => {
 const apiPrefix = '/api';
 // Rotas gerais da API (ex: /api/sandro)
 app.use(`${apiPrefix}/clientes`, clienteRoutes); // ex: /api/clientes/
+app.use(`${apiPrefix}/login`, authRoutes); // Rota de login ex: /api/login
+app.use(`${apiPrefix}/produtos`, produtoRoutes); // ex: /api/produtos
 
 // --TRATAMENTO DE ERROS --
 app.use((err, req, res, next) => {
@@ -58,12 +68,6 @@ const PORTA = process.env.PORT || 3333;
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}`)
 })
-
-//seus dados mockados (simulando o banco de dados)
-const listaDeClientes = [
-    {id: 1, nome: "João Silva", email: "joao.silva@exemple.com" },
-    {id: 2, nome: "Maria Santos", email: "maria.santos@exemple.com" }
-]
 
 //Rota para listar Todos os clientes (seu codigo original)
 app.get('/clientes', (req, res) => {
