@@ -13,7 +13,7 @@ const router = express.Router();
 router.post('/', validate(clienteCreateSchema), clienteController.adicionarCliente); // Rota final POST /api/clientes
 
 // 2. Aplica o proteção do login em todas as rotas abaixo desta linha
-router.use(authMiddleware);
+//router.use(authMiddleware);
 
 // O caminho base '/api/clientes' já foi definido no index.js
 // Agora definimos apenas as partes relativas: '/', '/:cpf', etc.

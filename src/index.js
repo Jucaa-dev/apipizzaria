@@ -68,33 +68,3 @@ const PORTA = process.env.PORT || 3333;
 app.listen(PORTA, () => {
     console.log(`Servidor rodando na porta ${PORTA}`)
 })
-
-//Rota para listar Todos os clientes (seu codigo original)
-app.get('/clientes', (req, res) => {
-    res.json(listaDeClientes);
-});
-//Nova Rota: rota para buscar UM cliente pelo id
-app.get('/clientes/:id', (req, res) => {
-    // captura o id da URL e converte para numero
-    const idDoCliente = parseInt(req.params.id)
-    // procura o cliente no array usando o metodo find()
-    const cliente = listaDeClientes.find(c => c.id === idDoCliente)
-    //Verifica se o cliente foi encontrado
-    if (cliente) {
-        //Se encontrou, retorna o cliente com status 200 (OK)
-        res.json(cliente)
-    } else {
-        //Se não encontrar, retorna um erro 404 (Not Found)
-        res.status(404).json({mensagem: "Cliente não encontrado"})
-    }
-})
-
-//Rota para criar um novo cliente 
-app.post('/clientes', (req, res) => {
-    // o middleware express.json() pega o corpo da requisição e o coloca em req.body
-    const novoCliente = req.body;
-
-    console.log("Criamos um novo Cliente:", novoCliente)
-
-    res.json({menssage: `Cliente ${novoCliente.novo} cadastrado com sucesso!`, data: novoCliente})
-})
