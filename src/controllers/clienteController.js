@@ -43,8 +43,9 @@ export const listarClienteCpf = async (req, res) => {
         if (!cliente) {
             return res.status(404).json({ error: `Cliente não encontrado`});
         }
+        res.status(200).json(cliente);
     } catch (err) {
-        console.error(`Erro ao buscar cliente:`, err),
+        console.error(`Erro ao buscar cliente:`, err);
         res.status(500).json({ error: `Erro interno do servidor` });
     }
 };
@@ -52,7 +53,7 @@ export const listarClienteCpf = async (req, res) => {
 export const adicionarCliente = async (req, res) => {
     try {
         const novoCliente = await clienteService.create(req.body);
-        res.staus(201).json({ message: `Cliente adicionado com sucesso`, data: novoCliente });
+        res.status(201).json({ message: `Cliente adicionado com sucesso`, data: novoCliente });
     } catch (err) {
         console.error(`Erro ao adicionar cliente:`, err);
         if (err.code === `ER_DUP_ENTRY`) {
@@ -69,7 +70,7 @@ export const atualizarCliente = async (req, res) => {
         if (!updated) {
             return res.status(404).json({ error: `Cliente não encontrado`});
         }
-        res.stataus(200).json({ message: `Cliente atualizado com sucesso` });
+        res.status(200).json({ message: `Cliente atualizado com sucesso` });
     } catch (err) {
         console.error(`Erro ao atualizar cliente:`, err);
         res.status(500).json({ error: `Erro ao atualizar cliente` });

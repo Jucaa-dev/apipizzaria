@@ -2,7 +2,7 @@ import * as produtoService from "../services/produtoService.js";
 import Joi from "joi";
 
 export const produtoCreateSchema = Joi.object({
-    idPedido: Joi.string().required(),
+    idProduto: Joi.string().required(),
     nome: Joi.string().required().max(30),
     descricao: Joi.string().required().max(100),
     tipo: Joi.string().required().max(10),
@@ -38,7 +38,7 @@ export const listarProdutos = async (req, res) => {
 export const adicionarProduto = async (req, res) => {
     try {
         const novoProduto = await produtoService.create(req.body);
-        res.staus(201).json({ message: `Produto adicionado com sucesso`, data: novoProduto });
+        res.status(201).json({ message: `Produto adicionado com sucesso`, data: novoProduto });
     } catch (err) {
         console.error(`Erro ao adicionar produto:`, err);
         if (err.code === `ER_DUP_ENTRY`) {
@@ -55,7 +55,7 @@ export const atualizarProduto = async (req, res) => {
         if (!updated) {
             return res.status(404).json({ error: `Produto não encontrado` });
         }
-        res.stataus(200).json({ message: `Produto atualizado com sucesso` });
+        res.status(200).json({ message: `Produto atualizado com sucesso` });
     } catch (err) {
         console.error(`Erro ao atualizar produto:`, err);
         res.status(500).json({ error: `Erro ao atualizar produto` });

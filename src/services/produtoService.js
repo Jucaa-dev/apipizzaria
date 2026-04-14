@@ -1,7 +1,5 @@
-import { join } from 'path';
-import db from '../db/db.js';
 
-export const findAll = async (minValor, maxValor, nome, id, tipo) => {
+    export const findAll = async (minValor, maxValor, nome, id, tipo) => {
     // 1. Defina a consulta SQL base
     let sql = 'SELECT * FROM produto';
     // 2. Cria um array para as condições WHERE
@@ -56,12 +54,13 @@ export const create = async (produto) => {
 };
 
 export const update = async (idproduto, produtoData) => {
-    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?'[produtoData, idproduto]);
+    const [result] = await db.query('UPDATE produto SET ? WHERE idProduto = ?', [produtoData, idproduto]);
     // Retorna true se uma linha foi afetada (produto existia), false caso contrário
     return result.affectedRows > 0;
 }
 
-export const remove = async (idproduto) => {
-    const [result] = await db.query('DELETE FROM produto WHERE idProduto = ?'[idproduto]);
+export const remove = async (id) => {
+    const [result] = await db.query('DELETE FROM produto WHERE idProduto = ?', [id]);
+    
     return result.affectedRows > 0;
-};  
+}; 
