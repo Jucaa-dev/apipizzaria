@@ -118,7 +118,8 @@
             <div class="container">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="fw-bold text-brand-vermelho "><i class="fa-solid fa-gear"></i>Gestão de produtos</h2>
-                    <button id="btn-cadastrar" class="btn btn-brand-vermelho fw-bold" data-bs-toggle="modal" data-bs-target="#adminModalCadastrar">
+                    <button id="btn-cadastrar" class="btn btn-brand-vermelho fw-bold" data-bs-toggle="modal"
+                        data-bs-target="#adminModalCadastrar">
                         <i class="fa-solid fa-plus"></i> Novo Produto
                     </button>
                     <button id="btn-logout" class="btn btn-outline-secondary">
@@ -130,11 +131,23 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-0 table-responsive">
                         <table class="table table-hover align-middle mb-0">
+                            <!-- Cabeçalho da tabela -->
                             <thead class="table-light">
                                 <tr>
                                     <th>Código</th>
+                                    <th>Nome</th>
+                                    <th>Descrição</th>
+                                    <th>Tipo</th>
+                                    <th>Imagem</th>
+                                    <th>Preço</th>
+                                    <th class="text-end">Ações</th>
                                 </tr>
                             </thead>
+                            <tbody id="tabela-admin">
+                                <!-- Vai ser preenchida pelo js -->
+
+
+                            </tbody>
                         </table>
                     </div>
 
@@ -189,7 +202,9 @@
 
 
     <!-- Adicionando o JavaScript do BootStrap -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="admin.js"></script>
 </body>
 
 </html>
