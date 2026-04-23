@@ -94,3 +94,14 @@ body{
 .bg-brand-branco{
     background-color: var(--brand-branco);
 }
+
+.login-admin-container{
+    max-width: 400px;
+    margin: 100px auto;
+}
+ 
+/*esconde o modal dos produtos*/
+ 
+#painel-administrativo{
+    display: none;
+}
