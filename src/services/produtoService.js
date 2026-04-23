@@ -1,5 +1,7 @@
+import db from '../db/db.js';
+import crypt from 'bcrypt';
 
-    export const findAll = async (minValor, maxValor, nome, id, tipo) => {
+export const findAll = async (minValor, maxValor, nome, id, tipo) => {
     // 1. Defina a consulta SQL base
     let sql = 'SELECT * FROM produto';
     // 2. Cria um array para as condições WHERE
@@ -30,7 +32,7 @@
     // Adicionamos o filtro por tipo
     if (tipo) {
         conditions.push('LOWER(tipo) LIKE ?');
-        values.push(`%${tipo.toLowerCase()}%`); 
+        values.push(`%${tipo.toLowerCase()}%`);
     }
 
     // 5. Se houver condições, anexa elas à consulta SQL
@@ -61,6 +63,6 @@ export const update = async (idproduto, produtoData) => {
 
 export const remove = async (id) => {
     const [result] = await db.query('DELETE FROM produto WHERE idProduto = ?', [id]);
-    
+
     return result.affectedRows > 0;
 }; 

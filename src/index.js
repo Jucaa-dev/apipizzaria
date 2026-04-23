@@ -22,7 +22,7 @@ import produtoRoutes from './routes/produtoRoutes.js';
 const _filename = fileURLToPath(import.meta.url)
 const _dirname = path.dirname(_filename)
 const corsOptions = {
-    origin: ['http://localhost:3333', 'https://meudominio.com'],
+    origin: ['http://localhost:3333', 'http://127.0.0.1:5500'],
     methods: 'GET, POST, PUT, PATCH, DELETE',
     credentials: true,
 };

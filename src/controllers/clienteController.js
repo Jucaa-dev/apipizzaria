@@ -12,7 +12,8 @@ export const clienteCreateSchema = Joi.object({
     cep: Joi.string().required(),
     telefone: Joi.string().required(),
     email: Joi.string().required().max(100),
-    senha: Joi.string().min(6).required()
+    senha: Joi.string().min(6).required(),
+    tipo: Joi.string().required()
 });
 
 export const clienteUpdateSchema = Joi.object({
