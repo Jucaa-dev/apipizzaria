@@ -63,7 +63,7 @@ $(document).ready(function () {
     })
 
     function carregarProdutosAdmin() {
-        $.get(`${API_URL}/produtos`), function (produtos) {
+        $.get(`${API_URL}/produtos`, function (produtos) {
             console.log(produtos)
             let linhas = "";
             produtos.forEach(prod => {
@@ -83,7 +83,7 @@ $(document).ready(function () {
                             <div class="fw-bold">${prod.tipo}</div>
                         </td>
 
-                        <td class="fw-medium">${Number(prod.valor).toFixed(2).replace('.',',')}</td>
+                        <td class="fw-medium">${Number(prod.valor).toFixed(2).replace('.', ',')}</td>
 
                         <td class="text-end">
                             <button class="btn btn-sm btn-outline-primary" data-id="${prod.idProduto}" id="btn-editar">
@@ -99,8 +99,73 @@ $(document).ready(function () {
             });
             $('#tabela-admin').html(linhas)
 
-        }
+        })
     }
+
+
+    // EVENTO: Cadastro novo produto
+    $('#form-admin').on("submit", function (e) {
+        e.preventDefault(); // Previne enviar o formulário vazio
+
+        const novoProduto = {
+
+            idProduto: $('#cadastro-id').val(),
+            nome: $('#cadastro-nome').val(),
+            descricao: $('#cadastro-descricao').val(),
+            tipo: $('#cadastro-tipo').val(),
+            valor: $('#cadastro-valor').val(),
+            imagem: $('#cadastro-imagem').val()
+
+        }
+
+        // Envia os dados > Requisição POST
+
+        $.ajax({
+            url: `${API_URL}/produtos`,
+            type: `POST`,
+            contentType: 'application/json',
+            data: JSON.stringify(novoProduto),
+            headers: { "Authorization": "Bearer" + localStorage.getItem('token') },
+            success: function () {
+                alert('Produto cadastrado com sucesso!'); // Envia uma mensagem de ok
+                $('#adminModalCadastrar').modal('hide'); // Esconde o modal
+                $('#form-admin')[0].reset(); // Limpa o formulário
+                carregarProdutosAdmin(); // Carrega os produtos atualizados
+            },
+            error: function (err) {
+                alert('Não foi possível cadastrar o produto.');
+                console.log(err);
+            }
+        })
+    })
+
+    // Excluindo um produto - DELETE
+    $(document).on('click', '#btn-excluir', function () {
+
+        const id = $(this).data("id");
+        if (confirm("Tem certeza que deseja excluir o produto?")) {
+            $.ajax({
+                url: `${API_URL}/produtos/${id}`,
+                type: `DELETE`,
+                headers: { "Authorization": "Bearer" + localStorage.getItem('token') },
+                success: function () {
+                    alert("Produto removido com sucesso");
+                    carregarProdutosAdmin();
+                },
+                error: function (err) {
+                    alert("Não foi possível excluir o produto");
+                    console.log(err)
+                }
+            })
+        }
+    })
+
+
+
+
+
+
+    verificarSessaoAdmin()
 
 })
 
