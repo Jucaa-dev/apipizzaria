@@ -187,9 +187,10 @@
                             </div>
                             <div class="mb-3 col-6">
                                 <label for="">Valor (R$)</label>
-                                <input type="number" id="cadastro-valor" class="form-control" step="0.1" min="0" required>
+                                <input type="number" id="cadastro-valor" class="form-control" step="0.1" min="0"
+                                    required>
                             </div>
-                            
+
                         </div>
 
                         <div class="modal-footer">
@@ -205,6 +206,54 @@
         </div>
 
 
+        <!-- MODAL DE EDIÇÃO -->
+        <div class="modal fade" id="adminModalEditar">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="form-editar">
+                        <div class="modal-header bg-warning">
+                            <h5 class="modal-title fw-bold text-brand-vermelho" id="adminModalLabel">Editar Produtos
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <input type="text" id="editar-id" class="form-control" disabled>
+
+                            <div class="mb-3">
+                                <label for="">Nome do Produto</label>
+                                <input type="text" class="form-control" id="editar-nome" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Descrição</label>
+                                <input type="text" class="form-control" id="editar-descricao" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Tipo</label>
+                                <input type="text" class="form-control" id="editar-tipo" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Valor</label>
+                                <input type="number" class="form-control" id="editar-valor" step="0.01" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="">Imagem</label>
+                                <input type="text" class="form-control" id="editar-imagem" required>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button id="btn-atualizar" class="btn btn-success fw-bold" type="submit">
+                                Atualizar
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
     </main>

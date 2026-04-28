@@ -158,6 +158,65 @@ $(document).ready(function () {
                 }
             })
         }
+
+        // Evento: Abrir o modal de atualização
+        $(document).on('click', '#btn-editar', function (res) {
+            const id = $(this).data("id")
+            console.log(id)
+            $.get(`${API_URL}/produtos/${id}`, function (res) {
+                console.log(res)
+                const dados = array.isArray(res) ? res.find(p => p.idProduto == id): res;
+                
+                if (dados) {
+                    $('#editar-id').val(dados.idProduto);
+                    $('#editar-nome').val(dados.nome);
+                    $('#editar-descricao').val(dados.descricao);
+                    $('#editar-tipo').val(dados.tipo);
+                    $('#editar-valor').val(dados.valor);
+                    $('#editar-imagem').val(dados.imagem);
+                    $('#adminModalEditar').modal('show')
+                }
+            })
+        })
+
+        // Evento: Salvar Edição - PUT
+        $('#btn-atualizar').click(function () {
+            const id = $('#editar-id').val(); // Pega o id do botão
+
+            // Cria uma constante para armazenar os novos dados que foram digitados
+            const dadosAtualizados = {
+                nome: $('#editar-nome').val(),
+                descricao: $('#editar-descricao').val(),
+                tipo: $('#editar-tipo').val(),
+                valor: $('#editar-valor').val(),
+                imagem: $('#editar-imagem').val(),
+            }
+
+            // Verificar os dados
+            console.log(id)
+            console.log(dadosAtualizados)
+
+            // Envio dos dados para atualização
+            $.ajax({
+                url: `${API_URL}/produtos/${id}`,
+                type: 'PUT',
+                contentType: 'application/json',
+                data: JSON.stringify(dadosAtualizados),
+                headers: { 'Authorization': 'Bearer' + localStorage.getItem('token')},
+                success: function () {
+                    alert('Dados atualizados com sucesso!')
+                    $('#adminModalEditar').modal('hide'),
+                    $('#form-editar')[0].reset()
+                    carregarProdutosAdmin()
+                },
+                error: function (err) {
+                    alert('Não foi possivel atualizar os dados.')
+                    console.log(err)
+                }
+            })
+            
+        })
+
     })
 
 
